@@ -1,0 +1,35 @@
+{
+	"v": {
+		"upstream": "main",
+		"minVersion": "0.2.4",
+		"cflags": ""
+	},
+	"defaultBuild": "debug",
+	"builds": {
+		"debug": {
+			"target": ".",
+			"output": "vuild1",
+			"args": [""]
+		}
+	},
+	"dependencies": [
+		{
+			"name": "Test1",
+			"lib": {
+				"pacman": "test1",
+				"apt": "test1",
+				"windows": "test1",
+				"mac": "test1"
+			}
+		},
+		{
+			"name": "Test2",
+			"lib": {
+				"pacman": "test2",
+				"apt": "test2",
+				"windows": "test2",
+				"mac": "test2"
+			}
+		}
+	]
+}
