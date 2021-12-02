@@ -22,7 +22,7 @@ fn (a VersionS) == (b VersionS) bool {
 }
 
 fn (v VersionS) str() string {
-	return '${v.major}.${v.minor}.${v.patch}'
+	return '${v.major}.${v.minor}.$v.patch'
 }
 
 fn create_version(major int, minor int, patch int) VersionS {
@@ -61,7 +61,6 @@ fn build(b Vuild, bb string) ? {
 		return error('The default build name has to be valid')
 	}
 
-
 	mut build_name := bb
 	if bb == '' {
 		build_name = b.default_build
@@ -71,7 +70,7 @@ fn build(b Vuild, bb string) ? {
 		}
 	}
 
-	eprintln('Using build: ${build_name}')
+	eprintln('Using build: $build_name')
 	build := b.builds[build_name]
 
 	eprintln('Building application: ...')
@@ -106,7 +105,33 @@ fn check_v_version(v Version) ? {
 	}
 }
 
-fn install_dependencies(deps []Dependency) ? {}
+fn install_dependencies(deps []Dependency) ? {
+	mut ops := ''
+	$if linux {
+		ops = 'linux'
+	} $else $if windows {
+		ops = 'windows'
+	} $else $if macos {
+		ops = 'macos'
+	}
+
+	eprintln('Got os: $ops')
+	for dep in deps {
+		if ops in dep.lib {
+			cmds := dep.lib[ops]
+
+			mut finshed := 0
+
+			for cmd in cmds {
+				res := os.execute(cmd)
+				if res.exit_code == 0 {
+					finshed++
+				}
+			}
+			eprintln('Executed $finshed/$cmds.len')
+		}
+	}
+}
 
 pub fn exec(msg string) ?string {
 	res := os.execute(msg)

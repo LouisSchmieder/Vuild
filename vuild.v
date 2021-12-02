@@ -24,9 +24,8 @@ fn main() {
 
 	if file == '.' || file == '' {
 		d := os.ls('.') or { panic(err) }
-		files = d.filter(it.split('.').last() == 'vuild' && it.split('.').len > 1)	
+		files = d.filter(it.split('.').last() == 'vuild' && it.split('.').len > 1)
 	}
-
 
 	if files.len == 0 {
 		eprintln('Found no input files')

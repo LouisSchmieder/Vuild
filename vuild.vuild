@@ -8,7 +8,7 @@
 	"builds": {
 		"debug": {
 			"target": ".",
-			"output": "vuild1",
+			"output": "vuild",
 			"args": [""]
 		}
 	},
@@ -16,19 +16,17 @@
 		{
 			"name": "Test1",
 			"lib": {
-				"pacman": "test1",
-				"apt": "test1",
-				"windows": "test1",
-				"mac": "test1"
+				"linux": ["test1"],
+				"windows": ["test1"],
+				"macos": ["test1"]
 			}
 		},
 		{
 			"name": "Test2",
 			"lib": {
-				"pacman": "test2",
-				"apt": "test2",
-				"windows": "test2",
-				"mac": "test2"
+				"linux": ["test2"],
+				"windows": ["test2"],
+				"macos": ["test2"]
 			}
 		}
 	]
